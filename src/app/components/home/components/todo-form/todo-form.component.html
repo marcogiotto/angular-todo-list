@@ -1,3 +1,7 @@
-<form [formGroup]="todoForm" (ngSubmit)="onSubmitForm()">
-
+<form  [formGroup]="todoForm" (ngSubmit)="onSubmitForm()">
+    <mat-form-field appearance="fill">
+        <mat-label>Task to do</mat-label>
+        <input formControlName="task" matInput>
+    </mat-form-field>
+    <button mat-raised-button color="primary" [disabled]="!taskValid">Add</button>
 </form>

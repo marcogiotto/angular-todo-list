@@ -1,3 +1,4 @@
+import { ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from './../../material/material.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { NgModule } from '@angular/core';
@@ -18,6 +19,7 @@ import { TodoFormComponent } from './components/todo-form/todo-form.component';
     HomeRoutingModule,
     FlexLayoutModule,
     MaterialModule,
+    ReactiveFormsModule
   ]
 })
 export class HomeModule { }
