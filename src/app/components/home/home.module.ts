@@ -7,12 +7,14 @@ import { CommonModule } from '@angular/common';
 import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home.component';
 import { TodoFormComponent } from './components/todo-form/todo-form.component';
+import { TodoFiltersComponent } from './components/todo-filters/todo-filters.component';
 
 
 @NgModule({
   declarations: [
     HomeComponent,
-    TodoFormComponent
+    TodoFormComponent,
+    TodoFiltersComponent
   ],
   imports: [
     CommonModule,
