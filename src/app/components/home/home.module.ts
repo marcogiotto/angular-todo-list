@@ -5,17 +5,19 @@ import { CommonModule } from '@angular/common';
 
 import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home.component';
+import { TodoFormComponent } from './components/todo-form/todo-form.component';
 
 
 @NgModule({
   declarations: [
-    HomeComponent
+    HomeComponent,
+    TodoFormComponent
   ],
   imports: [
     CommonModule,
     HomeRoutingModule,
     FlexLayoutModule,
-    MaterialModule
+    MaterialModule,
   ]
 })
 export class HomeModule { }
