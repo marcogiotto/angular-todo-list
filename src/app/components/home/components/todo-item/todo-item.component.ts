@@ -1,7 +1,9 @@
+import { AppState } from './../../../../store/app.state';
 import { TaskModel } from './../../models/task.model';
 import { FormControl } from '@angular/forms';
-import { taskStatus } from './../../models/task-status';
 import { Component, Input, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import * as taskActions from '../../../../store/actions/task.actions';
 
 @Component({
   selector: 'app-todo-item',
@@ -13,7 +15,7 @@ export class TodoItemComponent implements OnInit {
   taskStatus: FormControl;
   @Input('item') task: TaskModel | undefined;
 
-  constructor() {
+  constructor(private store: Store<AppState>) {
     this.taskStatus = new FormControl('');
   }
 
@@ -22,4 +24,10 @@ export class TodoItemComponent implements OnInit {
     this.taskStatus.setValue(this.task?.status);
   }
 
+  onTaskDelete() {
+    const taskId = this.task?.id;
+    if (!taskId) return;
+    if (!confirm(`Are you shure you want to delete task: ${this.task?.name}`)) return;
+    this.store.dispatch(taskActions.deleteTask({ taskId: taskId }));
+  }
 }

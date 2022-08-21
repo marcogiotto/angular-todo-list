@@ -6,5 +6,6 @@ export const initialState: TaskModel[] = [];
 
 export const taskReducer = createReducer(
     initialState,
-    on(taskActions.addTask, (state, { taskName }) => [...state, new TaskModel(taskName)])
+    on(taskActions.addTask, (state, { taskName }) => [...state, new TaskModel(taskName)]),
+    on(taskActions.deleteTask, (state, { taskId }) => state.filter(item => item.id !== taskId))
 )

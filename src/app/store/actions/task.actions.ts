@@ -4,3 +4,8 @@ export const addTask = createAction(
     '[Todo] create task',
     props<{ taskName: string }>()
 );
+
+export const deleteTask = createAction(
+    '[Todo] delete task',
+    props<{ taskId: number }>()
+)
