@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { TaskModel } from './../../models/task.model';
+import { FormControl } from '@angular/forms';
+import { taskStatus } from './../../models/task-status';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-todo-item',
@@ -7,9 +10,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TodoItemComponent implements OnInit {
 
-  constructor() { }
+  taskStatus: FormControl;
+  @Input('item') task: TaskModel | undefined;
+
+  constructor() {
+    this.taskStatus = new FormControl('');
+  }
 
   ngOnInit(): void {
+    console.log(this.task);
+    this.taskStatus.setValue(this.task?.status);
   }
 
 }

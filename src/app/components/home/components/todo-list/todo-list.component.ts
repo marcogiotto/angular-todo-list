@@ -1,3 +1,4 @@
+import { TaskModel } from './../../models/task.model';
 import { AppState } from './../../../../store/app.state';
 
 import { Component, OnInit } from '@angular/core';
@@ -11,7 +12,7 @@ import { map, Observable } from 'rxjs';
 })
 export class TodoListComponent implements OnInit {
 
-  tasks$: Observable<Task[] | null>;
+  tasks$: Observable<TaskModel[] | null>;
 
   constructor(private state: Store<AppState>) {
 

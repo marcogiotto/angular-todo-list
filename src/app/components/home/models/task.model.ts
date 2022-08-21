@@ -1,10 +1,10 @@
 import { taskStatus } from './task-status';
 
-export class Task {
+export class TaskModel {
 
     constructor(
-        private name: string,
-        private status: taskStatus = taskStatus.doing,
-        private id: number = new Date().getTime(),
+        public name: string,
+        public status: taskStatus = taskStatus.doing,
+        public id: number = new Date().getTime(),
     ) { }
 }
