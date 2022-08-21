@@ -1,1 +1,10 @@
-<p>todo-list works!</p>
+<div
+    fxLayout="column">
+   <div *ngIf="(tasks$ | async) as tasks; else noTasks">
+     <app-todo-item *ngFor="let task of tasks"></app-todo-item>
+   
+   </div>
+    <ng-template #noTasks>
+        <p>No tasks</p>
+    </ng-template>
+</div>
