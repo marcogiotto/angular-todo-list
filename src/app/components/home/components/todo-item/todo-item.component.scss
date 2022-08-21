@@ -1,0 +1,14 @@
+.task {
+    background: white;
+    padding: 1em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 10px;
+    margin-top: 1em;
+    .task_actions {
+        button {
+            margin-left: 1em;
+        }
+    }
+}
