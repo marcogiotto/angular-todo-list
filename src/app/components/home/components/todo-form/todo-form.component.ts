@@ -1,7 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Store } from '@ngrx/store';
 import { Subject, takeUntil } from 'rxjs';
-
+import { addTask } from 'src/app/store/actions/task.actions';
 @Component({
   selector: 'app-todo-form',
   templateUrl: './todo-form.component.html',
@@ -12,7 +13,8 @@ export class TodoFormComponent implements OnInit, OnDestroy {
   todoForm: FormGroup;
   taskValid = false;
   private unsubscribe$ = new Subject();
-  constructor() {
+
+  constructor(private store: Store<Task[]>) {
     this.todoForm = new FormGroup({
       task: new FormControl('')
     });
@@ -24,7 +26,10 @@ export class TodoFormComponent implements OnInit, OnDestroy {
   }
 
   onSubmitForm() {
-    console.log(this.todoForm.get('task')?.value.trim());
+    const taskVal = this.todoForm.get('task')?.value;
+    if (!taskVal) return;
+    this.store.dispatch(addTask({ taskName: taskVal }));
+    this.todoForm.reset();
   }
 
   private listenToFormChange() {
