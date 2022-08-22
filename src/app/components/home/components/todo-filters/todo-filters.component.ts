@@ -1,8 +1,11 @@
+import { AppState } from './../../../../store/app.state';
 import { FormControl } from '@angular/forms';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { taskStatus } from './../../models/task-status';
 import { Subject, take, takeUntil } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { setFilter } from 'src/app/store/actions/filter.actions';
 
 @Component({
   selector: 'app-todo-filters',
@@ -13,7 +16,8 @@ export class TodoFiltersComponent implements OnInit, OnDestroy {
   taskName: FormControl<string | null>;
   taskStatus: FormControl<string | null>;
   private unsubscribe$ = new Subject();
-  constructor() {
+
+  constructor(private store: Store<AppState>) {
     this.taskName = new FormControl('');
     this.taskStatus = new FormControl(taskStatus.all);
   }
@@ -28,7 +32,8 @@ export class TodoFiltersComponent implements OnInit, OnDestroy {
     this.taskName.valueChanges.pipe(
       takeUntil(this.unsubscribe$)
     ).subscribe(val => {
-      console.log(val);
+      const statusVal = this.taskStatus.value;
+      this.store.dispatch(setFilter({ status: statusVal, search: val }));
     })
   }
 
@@ -37,7 +42,8 @@ export class TodoFiltersComponent implements OnInit, OnDestroy {
     this.taskStatus.valueChanges.pipe(
       takeUntil(this.unsubscribe$)
     ).subscribe(val => {
-      console.log(val);
+      const searchTerm = this.taskName.value;
+      this.store.dispatch(setFilter({ status: val, search: searchTerm }));
     })
   }
 

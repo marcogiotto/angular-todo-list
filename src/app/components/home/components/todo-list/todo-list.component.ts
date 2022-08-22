@@ -16,6 +16,7 @@ export class TodoListComponent implements OnInit, OnDestroy {
   tasks$: Observable<TaskModel[] | null>;
   filters: filters = { status: null, search: null };
   private filtersSub: Subscription;
+
   constructor(private state: Store<AppState>) {
 
     this.tasks$ = this.state.select('tasks').pipe(
