@@ -2,7 +2,7 @@ import { Subject, takeUntil } from 'rxjs';
 import { AppState } from './../../../../store/app.state';
 import { TaskModel } from './../../models/task.model';
 import { FormControl } from '@angular/forms';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
 import * as taskActions from '../../../../store/actions/task.actions';
 
@@ -11,7 +11,7 @@ import * as taskActions from '../../../../store/actions/task.actions';
   templateUrl: './todo-item.component.html',
   styleUrls: ['./todo-item.component.scss']
 })
-export class TodoItemComponent implements OnInit {
+export class TodoItemComponent implements OnInit, OnDestroy {
 
   taskStatus: FormControl;
   taskClasses: string = 'task';
@@ -47,4 +47,11 @@ export class TodoItemComponent implements OnInit {
       this.store.dispatch(taskActions.changeStatusTask({ taskId: taskId, taskStatus: val }));
     })
   }
+
+
+  ngOnDestroy(): void {
+    this.unsubscribe$.next('');
+    this.unsubscribe$.complete();
+  }
+
 }
