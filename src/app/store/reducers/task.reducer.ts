@@ -9,14 +9,15 @@ export const taskReducer = createReducer(
     on(taskActions.addTask, (state, { taskName }) => [...state, new TaskModel(taskName)]),
     on(taskActions.deleteTask, (state, { taskId }) => state.filter(item => item.id !== taskId)),
     on(taskActions.changeStatusTask, (state, { taskId, taskStatus }) => {
-        const newState = [...state];
-
-        return newState.map(task => {
-            if (task.id === taskId) {
-                task.status = taskStatus;
+        return state.map(item => {
+            if (item.id === taskId) {
+                return {
+                    ...item,
+                    status: taskStatus
+                }
             }
-            return task
+            return item;
 
-        })
+        });
     })
 )

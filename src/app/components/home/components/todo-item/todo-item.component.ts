@@ -1,3 +1,4 @@
+import { Subject, takeUntil } from 'rxjs';
 import { AppState } from './../../../../store/app.state';
 import { TaskModel } from './../../models/task.model';
 import { FormControl } from '@angular/forms';
@@ -13,7 +14,10 @@ import * as taskActions from '../../../../store/actions/task.actions';
 export class TodoItemComponent implements OnInit {
 
   taskStatus: FormControl;
+  taskClasses: string = 'task';
+  private unsubscribe$ = new Subject();
   @Input('item') task: TaskModel | undefined;
+
 
   constructor(private store: Store<AppState>) {
     this.taskStatus = new FormControl('');
@@ -22,6 +26,8 @@ export class TodoItemComponent implements OnInit {
   ngOnInit(): void {
     console.log(this.task);
     this.taskStatus.setValue(this.task?.status);
+    this.taskClasses += '-' + this.task?.status;
+    this.listenToStatusChange();
   }
 
   onTaskDelete() {
@@ -29,5 +35,16 @@ export class TodoItemComponent implements OnInit {
     if (!taskId) return;
     if (!confirm(`Are you shure you want to delete task: ${this.task?.name}`)) return;
     this.store.dispatch(taskActions.deleteTask({ taskId: taskId }));
+  }
+
+
+  private listenToStatusChange() {
+    const taskId = this.task?.id;
+    if (!taskId) return;
+    this.taskStatus.valueChanges.pipe(
+      takeUntil(this.unsubscribe$)
+    ).subscribe(val => {
+      this.store.dispatch(taskActions.changeStatusTask({ taskId: taskId, taskStatus: val }));
+    })
   }
 }
