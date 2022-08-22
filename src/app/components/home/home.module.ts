@@ -1,3 +1,4 @@
+import { FilterPipe } from './../../shared/pipes/filter.pipe';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from './../../material/material.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -18,7 +19,8 @@ import { TodoItemComponent } from './components/todo-item/todo-item.component';
     TodoFormComponent,
     TodoFiltersComponent,
     TodoListComponent,
-    TodoItemComponent
+    TodoItemComponent,
+    FilterPipe
   ],
   imports: [
     CommonModule,

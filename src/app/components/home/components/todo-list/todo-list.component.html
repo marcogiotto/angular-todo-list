@@ -2,10 +2,8 @@
     fxLayout="column">
    <div *ngIf="(tasks$ | async) as tasks; else noTasks">
         <ul class="tasks-list">
-                <app-todo-item *ngFor="let task of tasks" [item]="task"></app-todo-item>
+                <app-todo-item *ngFor="let task of tasks | filter:filters" [item]="task"></app-todo-item>
         </ul>
-    
-   
    </div>
     <ng-template #noTasks>
         <p>No tasks</p>

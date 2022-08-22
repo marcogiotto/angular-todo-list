@@ -9,12 +9,11 @@ import { appReducers } from './store/app.state';
 import { MaterialModule } from './material/material.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { FilterPipe } from './shared/pipes/filter.pipe';
+
 
 @NgModule({
   declarations: [
-    AppComponent,
-    FilterPipe
+    AppComponent
   ],
   imports: [
     BrowserModule,
