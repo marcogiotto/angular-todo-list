@@ -4,7 +4,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { StoreModule, } from '@ngrx/store';
-import { taskReducer } from './store/reducers/task.reducer';
+import { appReducers } from './store/app.state';
 
 import { MaterialModule } from './material/material.module';
 import { AppRoutingModule } from './app-routing.module';
@@ -20,7 +20,7 @@ import { AppComponent } from './app.component';
     BrowserAnimationsModule,
     FlexLayoutModule,
     MaterialModule,
-    StoreModule.forRoot({ tasks: taskReducer }),
+    StoreModule.forRoot(appReducers),
   ],
   providers: [],
   bootstrap: [AppComponent]
