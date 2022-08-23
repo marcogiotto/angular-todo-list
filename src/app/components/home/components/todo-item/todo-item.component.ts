@@ -14,7 +14,6 @@ import * as taskActions from '../../../../store/actions/task.actions';
 export class TodoItemComponent implements OnInit, OnDestroy {
 
   taskStatus: FormControl;
-  taskClasses: string = 'task';
   private unsubscribe$ = new Subject();
   @Input('item') task: TaskModel | undefined;
 
@@ -26,7 +25,6 @@ export class TodoItemComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     console.log(this.task);
     this.taskStatus.setValue(this.task?.status);
-    this.taskClasses += '-' + this.task?.status;
     this.listenToStatusChange();
   }
 
