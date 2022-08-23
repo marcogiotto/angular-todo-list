@@ -12,7 +12,6 @@ import { taskStatus } from 'src/app/components/home/models/task-status';
 export class FilterPipe implements PipeTransform {
 
   transform(tasks: TaskModel[], filters: filters): any {
-    console.log(tasks, filters)
     const { status, search } = filters;
     if (search && status && status !== taskStatus.all) {
       return tasks.filter(item => item.status === status && item.name.includes(search))

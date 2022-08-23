@@ -1,9 +1,12 @@
 <div
     fxLayout="column">
    <div *ngIf="(tasks$ | async) as tasks; else noTasks">
-        <ul class="tasks-list">
-                <app-todo-item *ngFor="let task of (tasks | filter:filters) as filterData" [item]="task"></app-todo-item>
-        </ul>
+        <ng-container *ngIf="(tasks | filter:filters) as filterData">
+            <ul class="tasks-list" *ngIf="filterData.length > 0; else noTasks" >
+                <app-todo-item *ngFor="let task of filterData" [item]="task"></app-todo-item>
+            </ul>
+        </ng-container>
+        
    </div>
     <ng-template #noTasks>
         <p>No tasks</p>
