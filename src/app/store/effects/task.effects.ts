@@ -3,7 +3,7 @@ import { Injectable } from "@angular/core";
 
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import * as tasksActions from '../actions/task.actions';
-import { mergeMap, map, tap, catchError, of } from 'rxjs';
+import { mergeMap, map, tap } from 'rxjs';
 
 @Injectable()
 export class TaskEffects {
@@ -19,10 +19,31 @@ export class TaskEffects {
             tap(data => console.log(data)),
             mergeMap(
                 () => this.tasksService.getTasks().pipe(
-                    map(tasks => tasksActions.loadTasksSuccess({ tasks: tasks })),
-                    catchError(err => of(tasksActions.loadTasksError({ payload: err })))
+                    map(tasks => tasksActions.loadTasksSuccess({ tasks: tasks }))
                 )
 
+            )
+        )
+    )
+
+    addTask$ = createEffect(
+        () => this.actions$.pipe(
+            ofType(tasksActions.addTaskInit),
+            mergeMap(
+                ({ taskName }) => this.tasksService.onAddTask(taskName).pipe(
+                    map(res => tasksActions.addTaskSuccess())
+                )
+            )
+        )
+    );
+
+    updateTask$ = createEffect(
+        () => this.actions$.pipe(
+            ofType(tasksActions.deleteTaskInit),
+            mergeMap(
+                ({ taskId }) => this.tasksService.onDeleteTask(taskId).pipe(
+                    map(res => tasksActions.deleteTaskSuccess())
+                )
             )
         )
     )

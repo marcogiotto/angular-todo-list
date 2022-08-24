@@ -4,10 +4,7 @@
      <div *ngIf="tasksData.loading">
         Cargando.....
     </div>
-    <div *ngIf="tasksData.error">
-        ocurrío un error
-    </div>
-    <ng-container *ngIf="tasksData.loaded">
+    <ng-container *ngIf="!tasksData.loading">
          <div *ngIf="tasksData.tasks.length > 0; else noTasks">
         <ng-container *ngIf="(tasksData.tasks | filter:filters) as filterData">
             <ul class="tasks-list" *ngIf="filterData.length > 0; else noTasks" >

@@ -1,8 +1,9 @@
+import { AppState } from './../../../../store/app.state';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { Subject, takeUntil } from 'rxjs';
-import { addTask } from 'src/app/store/actions/task.actions';
+import { Subject, takeUntil, tap } from 'rxjs';
+import { addTask, addTaskInit } from 'src/app/store/actions/task.actions';
 @Component({
   selector: 'app-todo-form',
   templateUrl: './todo-form.component.html',
@@ -14,7 +15,7 @@ export class TodoFormComponent implements OnInit, OnDestroy {
   taskValid = false;
   private unsubscribe$ = new Subject();
 
-  constructor(private store: Store<Task[]>) {
+  constructor(private store: Store<AppState>) {
     this.todoForm = new FormGroup({
       task: new FormControl('')
     });
@@ -23,12 +24,17 @@ export class TodoFormComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.listenToFormChange();
+    this.store.select('tasks').pipe(
+      tap(data => {
+        console.log('from form', data.creating);
+      })
+    )
   }
 
   onSubmitForm() {
     const taskVal = this.todoForm.get('task')?.value;
     if (!taskVal) return;
-    this.store.dispatch(addTask({ taskName: taskVal }));
+    this.store.dispatch(addTaskInit({ taskName: taskVal }));
     this.todoForm.reset();
   }
 

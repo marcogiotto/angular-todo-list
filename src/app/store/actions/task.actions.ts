@@ -10,9 +10,9 @@ export const loadTasksSuccess = createAction(
     props<{ tasks: TaskModel[] }>()
 );
 
-export const loadTasksError = createAction(
-    ' [Todo] load tasks error',
-    props<{ payload: any }>()
+export const addTaskInit = createAction(
+    '[Todo] add task init',
+    props<{ taskName: string }>()
 );
 
 export const addTask = createAction(
@@ -20,10 +20,20 @@ export const addTask = createAction(
     props<{ taskName: string }>()
 );
 
+export const addTaskSuccess = createAction('[Todo] add task success');
+
+
+export const deleteTaskInit = createAction(
+    '[Todo] delte task init',
+    props<{ taskId: number }>()
+)
+
 export const deleteTask = createAction(
     '[Todo] delete task',
     props<{ taskId: number }>()
 );
+
+export const deleteTaskSuccess = createAction('[Todo] delete task success');
 
 export const changeStatusTask = createAction(
     '[Todo] change status task',
