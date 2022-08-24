@@ -35,7 +35,14 @@ export const deleteTask = createAction(
 
 export const deleteTaskSuccess = createAction('[Todo] delete task success');
 
+export const changeStatusTaskInit = createAction(
+    '[Todo] change status task init',
+    props<{ taskId: number, taskStatus: taskStatus }>()
+);
+
 export const changeStatusTask = createAction(
     '[Todo] change status task',
     props<{ taskId: number, taskStatus: taskStatus }>()
 )
+
+export const changeStatusTaskSuccess = createAction('[Todo] change status task success');

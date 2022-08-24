@@ -1,10 +1,10 @@
 <div
     fxLayout="column">
    <ng-container *ngIf="(tasksState$ | async) as tasksData">
-     <div *ngIf="tasksData.loading">
-        Cargando.....
+     <div fxLayoutAlign="center center" *ngIf="tasksData.loading || tasksData.deleting || tasksData.creating || tasksData.updating">
+       <mat-spinner></mat-spinner>
     </div>
-    <ng-container *ngIf="!tasksData.loading">
+    <ng-container *ngIf="!tasksData.loading && !tasksData.deleting && !tasksData.creating && !tasksData.updating">
          <div *ngIf="tasksData.tasks.length > 0; else noTasks">
         <ng-container *ngIf="(tasksData.tasks | filter:filters) as filterData">
             <ul class="tasks-list" *ngIf="filterData.length > 0; else noTasks" >

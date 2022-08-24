@@ -32,7 +32,7 @@ export class TodoItemComponent implements OnInit, OnDestroy {
     const taskId = this.task?.id;
     if (!taskId) return;
     if (!confirm(`Are you shure you want to delete task: ${this.task?.name}`)) return;
-    this.store.dispatch(taskActions.deleteTask({ taskId: taskId }));
+    this.store.dispatch(taskActions.deleteTaskInit({ taskId: taskId }));
   }
 
 
@@ -42,7 +42,7 @@ export class TodoItemComponent implements OnInit, OnDestroy {
     this.taskStatus.valueChanges.pipe(
       takeUntil(this.unsubscribe$)
     ).subscribe(val => {
-      this.store.dispatch(taskActions.changeStatusTask({ taskId: taskId, taskStatus: val }));
+      this.store.dispatch(taskActions.changeStatusTaskInit({ taskId: taskId, taskStatus: val }));
     })
   }
 

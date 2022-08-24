@@ -37,7 +37,7 @@ export class TaskEffects {
         )
     );
 
-    updateTask$ = createEffect(
+    deleteTask$ = createEffect(
         () => this.actions$.pipe(
             ofType(tasksActions.deleteTaskInit),
             mergeMap(
@@ -46,5 +46,17 @@ export class TaskEffects {
                 )
             )
         )
+    );
+
+    updateTask$ = createEffect(
+        () => this.actions$.pipe(
+            ofType(tasksActions.changeStatusTaskInit),
+            mergeMap(
+                ({ taskId, taskStatus }) => this.tasksService.onUpdateTask(taskId, taskStatus).pipe(
+                    map(res => tasksActions.changeStatusTaskSuccess())
+                )
+            )
+        )
     )
+
 }

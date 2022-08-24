@@ -1,3 +1,4 @@
+import { taskStatus } from './../../components/home/models/task-status';
 import { TaskModel } from './../../components/home/models/task.model';
 import { createReducer, on } from "@ngrx/store";
 import * as taskActions from '../actions/task.actions';
@@ -9,6 +10,7 @@ export interface Tasks {
     loading: boolean,
     creating: boolean,
     deleting: boolean,
+    updating: boolean,
 
 }
 
@@ -18,6 +20,7 @@ export const initialState: Tasks = {
     loading: false,
     creating: false,
     deleting: false,
+    updating: false
 };
 
 export const taskReducer = createReducer(
@@ -41,18 +44,22 @@ export const taskReducer = createReducer(
             tasks: [...state.tasks].filter(item => item.id !== taskId)
         }
     }),
-    on(taskActions.deleteTaskSuccess, (state) => ({ ...state, deleting: false }))
-    // on(taskActions.deleteTask, (state, { taskId }) => state.filter(item => item.id !== taskId)),
-    // on(taskActions.changeStatusTask, (state, { taskId, taskStatus }) => {
-    //     return state.map(item => {
-    //         if (item.id === taskId) {
-    //             return {
-    //                 ...item,
-    //                 status: taskStatus
-    //             }
-    //         }
-    //         return item;
-
-    //     });
-    // })
+    on(taskActions.deleteTaskSuccess, (state) => ({ ...state, deleting: false })),
+    on(taskActions.changeStatusTaskInit, (state, { taskId, taskStatus }) => ({ ...state, updating: true })),
+    on(taskActions.changeStatusTask, (state, { taskId, taskStatus }) => {
+        return {
+            ...state,
+            tasks: state.tasks.map(item => {
+                console.log(item, taskStatus);
+                if (item.id === taskId) {
+                    return {
+                        ...item,
+                        status: taskStatus
+                    }
+                }
+                return item;
+            })
+        }
+    }),
+    on(taskActions.changeStatusTaskSuccess, (state) => ({ ...state, updating: false }))
 )
