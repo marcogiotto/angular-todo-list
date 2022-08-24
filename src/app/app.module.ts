@@ -1,3 +1,4 @@
+import { TaskEffects } from './store/effects/task.effects';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -9,6 +10,8 @@ import { appReducers } from './store/app.state';
 import { MaterialModule } from './material/material.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { EffectsModule } from '@ngrx/effects';
+
 
 
 @NgModule({
@@ -21,6 +24,7 @@ import { AppComponent } from './app.component';
     BrowserAnimationsModule,
     FlexLayoutModule,
     MaterialModule,
+    EffectsModule.forRoot([TaskEffects]),
     StoreModule.forRoot(appReducers),
   ],
   providers: [],

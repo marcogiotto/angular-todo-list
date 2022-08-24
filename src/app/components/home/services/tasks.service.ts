@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 import { AppState } from './../../../store/app.state';
 import { Store } from '@ngrx/store';
 
-import { delay, Observable } from 'rxjs';
+import { delay, map, Observable, take } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +15,9 @@ export class TasksService {
 
   getTasks(): Observable<TaskModel[]> {
     return this.store.select('tasks').pipe(
-      delay(5000)
+      take(1),
+      delay(5000),
+      map(data => data.tasks)
     );
   }
 }

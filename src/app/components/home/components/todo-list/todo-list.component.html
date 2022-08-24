@@ -1,7 +1,15 @@
 <div
     fxLayout="column">
-   <div *ngIf="(tasks$ | async) as tasks; else noTasks">
-        <ng-container *ngIf="(tasks | filter:filters) as filterData">
+   <ng-container *ngIf="(tasksState$ | async) as tasksData">
+     <div *ngIf="tasksData.loading">
+        Cargando.....
+    </div>
+    <div *ngIf="tasksData.error">
+        ocurrío un error
+    </div>
+    <ng-container *ngIf="tasksData.loaded">
+         <div *ngIf="tasksData.tasks.length > 0; else noTasks">
+        <ng-container *ngIf="(tasksData.tasks | filter:filters) as filterData">
             <ul class="tasks-list" *ngIf="filterData.length > 0; else noTasks" >
                 <app-todo-item *ngFor="let task of filterData" [item]="task"></app-todo-item>
             </ul>
@@ -11,4 +19,7 @@
     <ng-template #noTasks>
         <p>No tasks</p>
     </ng-template>
+    </ng-container>
+
+   </ng-container>
 </div>
