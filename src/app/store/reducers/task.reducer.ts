@@ -1,8 +1,7 @@
-import { taskStatus } from './../../components/home/models/task-status';
 import { TaskModel } from './../../components/home/models/task.model';
 import { createReducer, on } from "@ngrx/store";
 import * as taskActions from '../actions/task.actions';
-import { retry } from 'rxjs';
+
 
 
 export interface Tasks {

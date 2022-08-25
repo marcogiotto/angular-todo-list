@@ -1,4 +1,4 @@
-import { taskStatus } from './task-status';
+import { taskStatus } from './task-status.model';
 
 export class TaskModel {
 

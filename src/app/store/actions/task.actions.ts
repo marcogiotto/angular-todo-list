@@ -1,5 +1,5 @@
 import { TaskModel } from './../../components/home/models/task.model';
-import { taskStatus } from './../../components/home/models/task-status';
+import { taskStatus } from '../../components/home/models/task-status.model';
 import { createAction, props } from "@ngrx/store";
 
 

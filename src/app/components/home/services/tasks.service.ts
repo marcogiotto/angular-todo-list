@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { taskStatus } from './../models/task-status';
+import { taskStatus } from '../models/task-status.model';
 
 import { AppState } from './../../../store/app.state';
 import { Store } from '@ngrx/store';

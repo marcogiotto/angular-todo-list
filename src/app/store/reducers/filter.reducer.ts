@@ -1,15 +1,16 @@
 import { createReducer, on } from '@ngrx/store';
-import { taskStatus } from './../../components/home/models/task-status';
+import { filterStatus, statusState } from 'src/app/components/home/models/filter-status.model';
+import { taskStatus } from '../../components/home/models/task-status.model';
 import * as filterActions from '../actions/filter.actions';
 
 
 export interface filters {
-    status: string | null,
+    status: statusState | null,
     search: string | null,
 }
 
 export const initialState: filters = {
-    status: taskStatus.all,
+    status: filterStatus.all,
     search: null
 };
 
