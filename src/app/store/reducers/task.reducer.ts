@@ -1,6 +1,7 @@
 import { TaskModel } from './../../components/home/models/task.model';
 import { createReducer, on } from "@ngrx/store";
 import * as taskActions from '../actions/task.actions';
+import { taskStatus } from 'src/app/components/home/models/task-status.model';
 
 
 
@@ -15,7 +16,23 @@ export interface Tasks {
 
 
 export const initialState: Tasks = {
-    tasks: [],
+    tasks: [
+        {
+            id: new Date().getTime(),
+            name: "test",
+            status: taskStatus.doing,
+        },
+        {
+            id: new Date().getTime(),
+            name: "test 2",
+            status: taskStatus.complete,
+        },
+        {
+            id: new Date().getTime(),
+            name: "test 3",
+            status: taskStatus.cancel,
+        }
+    ],
     loading: false,
     creating: false,
     deleting: false,
