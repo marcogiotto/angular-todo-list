@@ -1,10 +1,13 @@
+import { Component, Input, OnInit, OnDestroy } from '@angular/core';
+
 import { Subject, takeUntil } from 'rxjs';
+
+import { Store } from '@ngrx/store';
 import { AppState } from './../../../../store/app.state';
 import { TaskModel } from './../../models/task.model';
 import { FormControl } from '@angular/forms';
-import { Component, Input, OnInit, OnDestroy } from '@angular/core';
-import { Store } from '@ngrx/store';
 import * as taskActions from '../../../../store/actions/task.actions';
+import { taskStatus } from '../../models/task-status.model';
 
 @Component({
   selector: 'app-todo-item',
@@ -12,7 +15,7 @@ import * as taskActions from '../../../../store/actions/task.actions';
   styleUrls: ['./todo-item.component.scss']
 })
 export class TodoItemComponent implements OnInit, OnDestroy {
-
+  taskCompleted = taskStatus.complete;
   taskStatus: FormControl;
   private unsubscribe$ = new Subject();
   @Input('item') task: TaskModel | undefined;

@@ -10,7 +10,7 @@
                     <mat-option value="3">Cancel</mat-option>
                 </mat-select>
             </mat-form-field>
-            <button *ngIf="task?.status == '2'" mat-raised-button color="warn" (click)="onTaskDelete()">Delete</button>
+            <button *ngIf="task?.status == taskCompleted" mat-raised-button color="warn" (click)="onTaskDelete()">Delete</button>
     </div>
 
 </li>
