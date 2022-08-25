@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 
 import { taskStatus } from '../models/task-status.model';
 
-import { AppState } from './../../../store/app.state';
 import { Store } from '@ngrx/store';
+import { AppState } from './../../../store/app.state';
 import { changeStatusTask } from './../../../store/actions/task.actions';
 import { addTask, deleteTask } from 'src/app/store/actions/task.actions';
 import { TaskModel } from './../models/task.model';

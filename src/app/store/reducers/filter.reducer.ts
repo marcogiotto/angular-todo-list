@@ -1,6 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
 import { filterStatus, statusState } from 'src/app/components/home/models/filter-status.model';
-import { taskStatus } from '../../components/home/models/task-status.model';
 import * as filterActions from '../actions/filter.actions';
 
 

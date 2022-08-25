@@ -33,7 +33,6 @@ export const taskReducer = createReducer(
             ...state,
             tasks: [newTask, ...state.tasks]
         }
-
     }),
     on(taskActions.addTaskSuccess, (state) => ({ ...state, creating: false })),
     on(taskActions.deleteTaskInit, (state, { taskId }) => ({ ...state, deleting: true })),

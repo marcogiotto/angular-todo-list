@@ -1,5 +1,4 @@
 import { filterStatus } from './../../components/home/models/filter-status.model';
-import { State } from '@ngrx/store';
 import { TaskModel } from './../../components/home/models/task.model';
 import { Pipe, PipeTransform } from '@angular/core';
 import { filters } from 'src/app/store/reducers/filter.reducer';
