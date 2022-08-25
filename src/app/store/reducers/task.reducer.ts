@@ -18,17 +18,17 @@ export interface Tasks {
 export const initialState: Tasks = {
     tasks: [
         {
-            id: new Date().getTime(),
+            id: 1,
             name: "test",
             status: taskStatus.doing,
         },
         {
-            id: new Date().getTime(),
+            id: 2,
             name: "test 2",
             status: taskStatus.complete,
         },
         {
-            id: new Date().getTime(),
+            id: 3,
             name: "test 3",
             status: taskStatus.cancel,
         }
